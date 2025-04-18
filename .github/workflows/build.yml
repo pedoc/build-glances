@@ -151,7 +151,7 @@ jobs:
         --include-data-dir=glances/exports/=glances/exports \
         --include-data-dir=glances/outputs/=glances/outputs \
         run.py  
-        move dist ../
+        mv dist ../
 
     - name: Checksum
       run: |
