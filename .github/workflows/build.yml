@@ -34,7 +34,7 @@ jobs:
         pip install nuitka
     - name: Clone glances
       run: |
-        git clone -b ${{ matrix.glances_version}} --depth 1 https://gitee.com/pedoc/glances.git
+        git clone -b ${{ matrix.glances_version}} --depth 1 https://github.com/pedoc/glances.git
 
     - name: Build with Nuitka (Windows)
       run: |
@@ -135,10 +135,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install nuitka zstandard
         pip install -r requirements.txt
-        
+
     - name: Clone glances
       run: |
-        git clone -b ${{ matrix.glances_version}} --depth 1 https://gitee.com/pedoc/glances.git
+        git clone -b ${{ matrix.glances_version}} --depth 1 https://github.com/pedoc/glances.git
     
     - name: Build with Nuitka (Linux)
       run: |
