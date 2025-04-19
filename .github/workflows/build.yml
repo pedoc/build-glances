@@ -72,12 +72,12 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            python-version: '3.9'
+            python-version: '3.9.1'
             arch: x64
             output_name: glances-linux-x64
             glances_version: 'nv3.4.0.5'
           - os: ubuntu-24.04-arm #ubuntu-latest-arm
-            python-version: '3.9'
+            python-version: '3.9.1'
             arch: arm64
             output_name: glances-linux-arm64
             glances_version: 'nv3.4.0.5'
@@ -96,12 +96,12 @@ jobs:
     #     python-version: ${{ matrix.python-version }}
     #     architecture: ${{ matrix.arch }}
 
-    - name: Set up Python
-      run: |
-        apt update
-        apt install python3 python3-pip patchelf zlib1g-dev -y
-        mv /usr/bin/python /usr/bin/python.bak || true
-        ln -s /usr/bin/python3 /usr/bin/python
+    # - name: Set up Python
+    #   run: |
+    #     apt update
+    #     apt install python3 python3-pip patchelf zlib1g-dev -y
+    #     mv /usr/bin/python /usr/bin/python.bak || true
+    #     ln -s /usr/bin/python3 /usr/bin/python
 
     # - name: Set up Python
     #   run: |
@@ -118,6 +118,21 @@ jobs:
 
     #     pyenv install ${{ matrix.python-version }}
     #     pyenv global ${{ matrix.python-version }}
+
+    - name: Build Python ${{ matrix.python-version }}
+      run: |
+        apt update
+        apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+        wget https://www.python.org/ftp/python/${{ matrix.python-version }}/Python-${{ matrix.python-version }}.tgz
+        tar -xf Python-${{ matrix.python-version }}.tgz
+        cd Python-${{ matrix.python-version }}
+        ./configure --enable-optimizations
+        make -j 4
+        make install
+        python3 -V
+        pip3 -V
+        python -V
+        pip -V
     
     - name: Install dependencies
       run: |
