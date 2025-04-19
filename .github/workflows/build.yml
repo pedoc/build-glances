@@ -122,7 +122,7 @@ jobs:
     - name: Build Python ${{ matrix.python-version }}
       run: |
         apt update
-        apt install -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
+        apt install -y wget build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev
         wget https://www.python.org/ftp/python/${{ matrix.python-version }}/Python-${{ matrix.python-version }}.tgz
         tar -xf Python-${{ matrix.python-version }}.tgz
         cd Python-${{ matrix.python-version }}
